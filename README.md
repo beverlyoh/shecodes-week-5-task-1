@@ -71,3 +71,72 @@ The only thing that should change is the name of the function dependant on the t
 
 
 Note: obviously your code should handle more test cases than just the two I provided, these are just examples to demonstrate how I expect to be able to call your code). 
+
+
+## Testing
+
+I have provided 4 test files, one for each algorithm.
+To use these files you can use the following commands:
+
+```
+python3 test_credit_card.py
+python3 test_gtin13.py
+python3 test_isbn10.py
+python3 test_isbn13.py
+```
+
+The test files assume:
+- Your functions are named:
+    - `calculate_credit_card_number_check_digit()`
+    - `validate_credit_card_number_check_digit()`
+    - `calculate_gtin13_barcode_check_digit()`
+    - `validate_gtin13_barcode_check_digit()`
+    - `calculate_isbn10_barcode_check_digit()`
+    - `validate_isbn10_barcode_check_digit()`
+    - `calculate_isbn13_barcode_check_digit()`
+    - `validate_isbn13_barcode_check_digit()`
+- Each algorithm has it's own file, named:
+    - `creditCard.py`
+    - `gtin13.py`
+    - `isbn10.py`
+    - `isbn13.py`
+- That each algorithm's file is in the same folder as its corresponding test file.
+
+### Troubleshooting
+Here are some errors you may encounter and what they mean:
+
+1. Module Not Found
+
+`ModuleNotFoundError: No module named 'gtin13'`
+
+Check you have named the gtin13 file and function correctly, and that the test file is in the same folder.
+
+2. Assertion Errors
+
+```
+======================================================================
+FAIL: test_calculate_gtin13_barcode_check_digit (__main__.GTIN13Test)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "test_gtin13.py", line 11, in test_calculate_gtin13_barcode_check_digit
+    self.assertEqual(calculate_gtin13_barcode_check_digit('940055061977'), '0')
+AssertionError: 5 != '0'
+- 5
++ 0
+```
+`test_calculate_gtin13_barcode_check_digit` was expecting your `calculate_gtin13_barcode_check_digit` function to return the string `0` but it got the integer `5`.
+
+```
+======================================================================
+FAIL: test_valid_validate_gtin13_barcode_check_digit (__main__.GTIN13Test)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "test_gtin13.py", line 22, in test_valid_validate_gtin13_barcode_check_digit
+    'This is a valid gtin13 barcode.'
+AssertionError: 'This is an invalid gtin13 barcode.' != 'This is a valid gtin13 barcode.'
+- This is an invalid gtin13 barcode.
+?          ^^^^
++ This is a valid gtin13 barcode.
+? 
+```
+`test_valid_validate_gtin13_barcode_check_digit` was expecting your `validate_gtin13_barcode_check_digit` function to return `This is a valid gtin13 barcode.` but it got `This is an invalid gtin13 barcode.`
